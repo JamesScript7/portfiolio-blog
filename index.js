@@ -32,28 +32,19 @@ app.get("/contact", (req, res) => {
 	res.render("contact");
 });
 
-app.get('/articles', articlesController.get);
+app.get('/bloghome', articlesController.get);
 
-// blog home page
-app.get("/bloghome", (req, res) => {
-	// Render bloghome.ejs with the list of posts
-	res.render("bloghome");
-});
+/*
+	You can get rid of this
+	*	app.get("/bloghome", (req, res) => {
+	*
+	*		// Render bloghome.ejs with the list of posts
+	*		res.render("bloghome");
+	*	});
+*/
 
 // blog post page
-app.get("/blogpost/:id", (req, res) => {
-	// Find the article in the articles.json file.
-		 const article = articles.filter((article) => {
-			return article.id == req.params.id; // eslint-disable-line
-		});
-	// render the blogpost.ejs template with the articles content
-	res.render("blogpost", {
-		img: article[0].img,
-		author: article[0].author,
-		title: article[0].title,
-		body: article[0].body,
-	});
-});
+app.get("/blogpost/:id", articlesController.show);
 
 
 // This is a catch....
